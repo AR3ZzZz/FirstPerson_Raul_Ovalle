@@ -25,7 +25,7 @@ public class FirstPerson : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
         Vector3 input = new Vector3 (h, v, 0).normalized;
-        float angulo =Mathf.Atan2(input.x, input.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+        float angulo =Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
 
 
 
