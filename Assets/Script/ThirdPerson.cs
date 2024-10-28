@@ -7,7 +7,7 @@ public class ThirdPerson : MonoBehaviour
 
     [SerializeField] float velocidadMovimiento;
     [SerializeField] float smoothTime;
-    //[SerializeField]
+    Animator anim;
     //[SerializeField]
     //[SerializeField]
 
@@ -16,6 +16,7 @@ public class ThirdPerson : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
