@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class FirstPerson : MonoBehaviour
 {
+    [SerializeField] int vidas;
+
     [Header("Mov")]
     [SerializeField] float velocidadMovimiento;
     [SerializeField] float factorGravedad;
@@ -79,6 +81,10 @@ public class FirstPerson : MonoBehaviour
         //esfera de deteccion
         bool result = Physics.CheckSphere(pies.position, radioDeteccion, queEsSuelo);
         return result;
+    }
+    public void RecibirDanho(int x)
+    {
+        vidas -= x;
     }
 
     private void OnDrawGizmos()
