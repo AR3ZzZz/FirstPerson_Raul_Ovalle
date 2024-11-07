@@ -10,6 +10,8 @@ public class Pedroski : MonoBehaviour
     [SerializeField] float radioImpacto;
     [SerializeField] LayerMask danhable;
     [SerializeField] int danhoEnemigo;
+    int vidaEnemigo;
+
 
     bool puedoDanhar;
     NavMeshAgent agent;
@@ -89,5 +91,8 @@ public class Pedroski : MonoBehaviour
         puedoDanhar = true;
     }
 
+    public void RecibirDanho(float x)
+    {
 
+    }
 }
