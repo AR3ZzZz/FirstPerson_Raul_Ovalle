@@ -10,7 +10,8 @@ public class Pedroski : MonoBehaviour
     [SerializeField] float radioImpacto;
     [SerializeField] LayerMask danhable;
     [SerializeField] int danhoEnemigo;
-    int vidaEnemigo;
+
+    float vidaEnemigo;
 
 
     bool puedoDanhar;
@@ -18,7 +19,11 @@ public class Pedroski : MonoBehaviour
     FirstPerson player;
     Animator animator;
     bool ventanaAbierta;
-    
+
+    Rigidbody[] huesos;
+
+    public float VidaEnemigo { get => vidaEnemigo; set => vidaEnemigo = value; }
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -90,9 +95,19 @@ public class Pedroski : MonoBehaviour
         ventanaAbierta = false;
         puedoDanhar = true;
     }
+    //2checkboxes, gameobjects
 
-    public void RecibirDanho(float x)
+    public void Morir()
     {
 
+        agent.enabled = false;
+        animator.enabled = false;
+    }
+    void CambiarEstadoHuesos(bool estado)
+    {
+        for (int i = 0; i < huesos.Length; i++)
+        {
+            huesos[i].isKinematic = estado;
+        }
     }
 }

@@ -21,7 +21,7 @@ public class ArmaManual : MonoBehaviour
         {
             if (Physics.Raycast(cam.transform.position,cam.transform.forward,out RaycastHit hitInfo, misDatos.distanciaAtaque)) 
             {
-                hitInfo.transform.GetComponent<Pedroski>().RecibirDanho(misDatos.danhoAtaque);
+                hitInfo.transform.GetComponent<EnemyPart>().RecibirDanho(misDatos.danhoAtaque);
             }
         }
     }
