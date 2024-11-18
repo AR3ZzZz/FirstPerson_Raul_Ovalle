@@ -6044,6 +6044,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 0}
   Spawns: []
+  spawnsPerLevel: 0
+  roundsPerLevel: 5
+  levelNumber: 0
+  timeBetweenSpawn: 3
+  timeBetweenRound: 10
+  timeBetweenLevels: 15
 --- !u!4 &2011036068
 Transform:
   m_ObjectHideFlags: 0
