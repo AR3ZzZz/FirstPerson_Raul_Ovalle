@@ -8,10 +8,12 @@ public class EnemyPart : MonoBehaviour
     //Este script iria asignado a las partes con collider del Ragdoll
 
     [SerializeField] Pedroski mainScript;
+    [SerializeField] float dmgMultiplicator;
+    Rigidbody rb;
 
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -27,5 +29,10 @@ public class EnemyPart : MonoBehaviour
             mainScript.Morir();
         }
 
+    }
+    public void Explotar(float x, Vector3 puntoImpacto, float y, float up)
+    {
+
+        rb.AddExplosionForce(x, puntoImpacto, y, up, ForceMode.Impulse);
     }
 }
