@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class FirstPerson : MonoBehaviour
 {
-    [SerializeField] int vidas;
+    [SerializeField] int vidaMaxima;
+    int vidaActual;
 
     [Header("Mov")]
     [SerializeField] float velocidadMovimiento;
@@ -33,13 +34,13 @@ public class FirstPerson : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;   //Centra en la raton y lo oculta
+        vidaActual = vidaMaxima;
     }
 
     void Update()
     {
         MoverYRotar();
         AplicarGravedad();
-        Debug.Log(characterController.velocity.magnitude);
 
         if (EnSuelo())
         {
@@ -100,10 +101,22 @@ public class FirstPerson : MonoBehaviour
         bool result = Physics.CheckSphere(pies.position, radioDeteccion, queEsSuelo);
         return result;
     }
-    public void RecibirDanho(int x)
+    public void RecibirDanho(int danho)
     {
-        vidas -= x;
+        vidaActual -= danho;
+        Debug.Log(vidaActual);
+        if (vidaActual <= 0) 
+        {
+            vidaActual = 0;
+            Morir();
+        }
     }
+
+    private void Morir()
+    {
+        
+    }
+
     void PisadasPlayer()
     {        
         if (pieDer)
@@ -116,6 +129,8 @@ public class FirstPerson : MonoBehaviour
         }
         pieDer = !pieDer;
     }
+
+   
 
     private void OnDrawGizmos()
     {

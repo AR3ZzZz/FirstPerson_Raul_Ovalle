@@ -62,7 +62,11 @@ public class Pedroski : MonoBehaviour
         {
             for (int i = 0;  i < collDetectados.Length;  i++)
             {
-                collDetectados[i].GetComponent<FirstPerson>().RecibirDanho(danhoEnemigo);
+                if (collDetectados[i].TryGetComponent(out FirstPerson player))
+                {
+                    player.RecibirDanho(danhoEnemigo);
+                }
+                
             }
             puedoDanhar = false;
         }
