@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5fa4fec4c094c3419cc3c381ad2091e, type: 3}
   m_Name: Gun
   m_EditorClassIdentifier: 
-  balascargador: 7
+  balasCargador: 0
   balasBolsa: 40
-  cadenciaAtaque: 1.5
-  distanciaAtaque: 300
+  cadenciaAtaque: 0.1
+  distanciaAtaque: 60
   danhoAtaque: 20
+  cambiarModoDisparo: 0
+  disparoAutomatico: 0
+  disparoSemi: 0
