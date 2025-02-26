@@ -8,6 +8,7 @@ public class PrimaryWeapon : MonoBehaviour
     [Header("Weapon Info")]
     [SerializeField] private ArmaSO misDatos;
     int balasMaximasCargador;
+    int balasMaximasBolsa;
     float proximoDisparo;
     bool recargando;
 
@@ -19,6 +20,7 @@ public class PrimaryWeapon : MonoBehaviour
     {
         cam = Camera.main;
         balasMaximasCargador = misDatos.balasCargador;
+        balasMaximasBolsa = misDatos.balasBolsa;
     }
 
     // Update is called once per frame
@@ -44,7 +46,11 @@ public class PrimaryWeapon : MonoBehaviour
                 }
             }
         }
-        
+        if (Input.GetKeyDown(KeyCode.R) && misDatos.balasCargador < balasMaximasCargador)
+        {
+            Recarga();
+        }
+
 
     }
 
@@ -68,7 +74,7 @@ public class PrimaryWeapon : MonoBehaviour
 
     void Recarga()
     {
-        if (!recargando && misDatos.balasCargador < balasMaximasCargador)
+        if (!recargando)
         {
             recargando = true;
         }
