@@ -19,6 +19,16 @@ public class FirstPerson : MonoBehaviour
     CharacterController characterController;
     Vector3 movVertical;
     //Sirve para los saltos y para la gravedad
+
+    [Header("Pisadas")]
+    [SerializeField] AudioSource sourcePisadas;
+    [SerializeField] AudioClip[] sonidosPisadas;
+    [SerializeField] float tiempoEntrePisadas;
+    float proximaPisada;
+    bool pieDer;
+
+
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -29,13 +39,20 @@ public class FirstPerson : MonoBehaviour
     {
         MoverYRotar();
         AplicarGravedad();
+        Debug.Log(characterController.velocity.magnitude);
 
         if (EnSuelo())
         {
             movVertical.y = 0;
             Salto();
         }
-        
+
+        if (EnSuelo() && characterController.velocity.magnitude > 0 && Time.time >= proximaPisada)
+        {
+            PisadasPlayer();
+            proximaPisada = Time.time + tiempoEntrePisadas;
+        }
+
     }
 
     private void Salto()
@@ -52,18 +69,19 @@ public class FirstPerson : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
         Vector3 input = new Vector3 (h, v, 0).normalized;
-        float angulo =Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+        transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+
 
 
 
         if (input.magnitude > 0)
         {
-             Vector3 movimiento = Quaternion.Euler (0, angulo, 0) * Vector3.forward;
     
-             transform.eulerAngles = new Vector3(0, angulo, 0);
+            float angulo =Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+            Vector3 movimiento = Quaternion.Euler (0, angulo, 0) * Vector3.forward;
             
              //Me muevo hacia donde miro
-             characterController.Move(movimiento * velocidadMovimiento * Time.deltaTime);
+            characterController.Move(movimiento * velocidadMovimiento * Time.deltaTime);
         }
 
         
@@ -85,6 +103,18 @@ public class FirstPerson : MonoBehaviour
     public void RecibirDanho(int x)
     {
         vidas -= x;
+    }
+    void PisadasPlayer()
+    {        
+        if (pieDer)
+        {
+            sourcePisadas.PlayOneShot(sonidosPisadas[0]);
+        }
+        else 
+        {
+            sourcePisadas.PlayOneShot(sonidosPisadas[1]);
+        }
+        pieDer = !pieDer;
     }
 
     private void OnDrawGizmos()
