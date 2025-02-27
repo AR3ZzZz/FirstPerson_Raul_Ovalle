@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5fa4fec4c094c3419cc3c381ad2091e, type: 3}
   m_Name: PrimaryGun
   m_EditorClassIdentifier: 
-  balasCargador: 32
-  balasBolsa: 192
-  cadenciaAtaque: 0.075
+  balasCargador: 9957
+  balasBolsa: 999999968
+  cadenciaAtaque: 10
   distanciaAtaque: 80
   danhoAtaque: 12
   cambiarModoDisparo: 1

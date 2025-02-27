@@ -20,15 +20,18 @@ public class Pedroski : MonoBehaviour
     Animator animator;
     bool ventanaAbierta;
 
-    Rigidbody[] huesos;
+    [SerializeField] Rigidbody[] huesos;
+    [SerializeField] Collider[] colliders;
 
     public float VidaEnemigo { get => vidaEnemigo; set => vidaEnemigo = value; }
 
     void Start()
     {
+        vidaEnemigo = 100;
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindObjectOfType<FirstPerson>();
         animator = GetComponent<Animator>();
+        CambiarEstadoHuesos(true);
 
         int animCorrer = Random.Range(0, 2);
 
@@ -45,7 +48,10 @@ public class Pedroski : MonoBehaviour
 
     void Update()
     {
-        SeguiryAtacar();
+        if (vidaEnemigo > 0)
+        {
+            SeguiryAtacar();
+        }
         if (ventanaAbierta && puedoDanhar)
         {
 
@@ -76,7 +82,7 @@ public class Pedroski : MonoBehaviour
     {
         agent.SetDestination(player.transform.position);
 
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
         {
             agent.isStopped = true;
             animator.SetBool("Attacking", true);
@@ -106,6 +112,7 @@ public class Pedroski : MonoBehaviour
 
         agent.enabled = false;
         animator.enabled = false;
+        CambiarEstadoHuesos(false);
     }
     void CambiarEstadoHuesos(bool estado)
     {
@@ -114,4 +121,5 @@ public class Pedroski : MonoBehaviour
             huesos[i].isKinematic = estado;
         }
     }
+    
 }

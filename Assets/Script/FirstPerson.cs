@@ -1,12 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class FirstPerson : MonoBehaviour
 {
     [SerializeField] int vidaMaxima;
     int vidaActual;
+
+    [SerializeField] GameManager gameManager;
+    [SerializeField] TMP_Text vidasText;
+
 
     [Header("Mov")]
     [SerializeField] float velocidadMovimiento;
@@ -33,8 +38,10 @@ public class FirstPerson : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;   //Centra en la raton y lo oculta
+        //Cursor.lockState = CursorLockMode.Locked;   //Centra en la raton y lo oculta
         vidaActual = vidaMaxima;
+        vidasText.SetText("HP: " + vidaActual);
+
     }
 
     void Update()
@@ -104,7 +111,7 @@ public class FirstPerson : MonoBehaviour
     public void RecibirDanho(int danho)
     {
         vidaActual -= danho;
-        Debug.Log(vidaActual);
+        vidasText.SetText("HP: " + vidaActual);
         if (vidaActual <= 0) 
         {
             vidaActual = 0;
@@ -114,7 +121,7 @@ public class FirstPerson : MonoBehaviour
 
     private void Morir()
     {
-        
+        gameManager.Lose();
     }
 
     void PisadasPlayer()

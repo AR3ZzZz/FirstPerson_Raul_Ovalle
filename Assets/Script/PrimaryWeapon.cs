@@ -27,8 +27,8 @@ public class PrimaryWeapon : MonoBehaviour
     void Update()
     {
         CambiarDisparo();
-        if (!recargando)
-        {
+       
+        
             if (misDatos.disparoAutomatico)
             {
                 if (Input.GetMouseButton(0) && Time.time >= proximoDisparo)
@@ -45,7 +45,7 @@ public class PrimaryWeapon : MonoBehaviour
                     Disparar();
                 }
             }
-        }
+        
         if (Input.GetKeyDown(KeyCode.R) && misDatos.balasCargador < balasMaximasCargador)
         {
             Recarga();
@@ -61,10 +61,13 @@ public class PrimaryWeapon : MonoBehaviour
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hitInfo, misDatos.distanciaAtaque))
             {
-                TryGetComponent(out Pedroski enemy);
+                Debug.Log(hitInfo.collider.name);
+                if (hitInfo.transform.TryGetComponent(out EnemyPart enemy))
                 {
+                    enemy.RecibirDanho(misDatos.danhoAtaque);
 
                 }
+               
             }
             misDatos.balasCargador --;
         }
@@ -74,21 +77,10 @@ public class PrimaryWeapon : MonoBehaviour
 
     void Recarga()
     {
-        if (!recargando)
-        {
-            recargando = true;
-        }
-    }
-
-    void FinRecarga()
-    {
         int balasRecargadas = balasMaximasCargador - misDatos.balasCargador;
         misDatos.balasCargador = balasMaximasCargador;
         misDatos.balasBolsa -= balasRecargadas;
-        recargando = true;
-
     }
-
     void CambiarDisparo()
     {
         if (misDatos.cambiarModoDisparo)

@@ -23,9 +23,12 @@ public class EnemyPart : MonoBehaviour
 
     public void RecibirDanho(float x)
     {
-        //mainScript.VidaEnemigo -= RecibirDanho;
+        mainScript.VidaEnemigo -= x * dmgMultiplicator;
+        Debug.Log(mainScript.VidaEnemigo);
+
         if (mainScript.VidaEnemigo <= 0)
         {
+            Debug.Log("Muero");
             mainScript.Morir();
         }
 

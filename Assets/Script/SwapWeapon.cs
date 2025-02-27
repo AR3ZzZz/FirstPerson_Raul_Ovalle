@@ -18,7 +18,7 @@ public class SwapWeapon : MonoBehaviour
     void Update()
     {
         WeaponSwapKeys();
-        WeaponSwapMouse();
+        //WeaponSwapMouse();
     }
 
     private void WeaponSwapMouse()
